@@ -1,0 +1,107 @@
+.gallery-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  top: 20vh;
+  margin-bottom:100%;
+}
+
+.gallery-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+
+}
+.gallery:after {
+  background-color: transparent;
+}
+
+.gallery-container input[type="file"] {
+  display: block;
+  margin: 20px auto;
+}
+
+.gallery-container button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.gallery-container button:hover {
+  background-color: #0056b3;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+  width: max(1000px,90%);
+  gap: 20px;
+
+}
+
+.gallery-item {
+  position: relative;
+  width: 100%;
+  max-width:90%; 
+  height: max-content;
+  margin: 0 auto;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: min(200px);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#delete{
+  position: absolute;
+  top: 0;
+  right: 25px;
+  background: #dc3545;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  font-size: 22px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 1;
+}
+
+#delete:hover {
+  background: #e57c85;
+}
+
+@media (min-width: 576px) {
+  .gallery-item {
+    width: calc(50% - 20px); 
+  }
+}
+
+@media (min-width: 768px) {
+  .gallery-item {
+    width: calc(33.33% - 20px); 
+  }
+}
+
+@media (min-width: 992px) {
+  .gallery-item {
+    width: calc(25% - 20px); 
+  }
+}
