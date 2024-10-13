@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../Css/open-iconic-bootstrap.min.css";
 import "../../Css/animate.css";
@@ -20,11 +22,31 @@ import ibg_2 from "../../images/bg_2.jpg";
 import ip1 from "../../images/person_1.jpg";
 import ip2 from "../../images/person_2.jpg";
 import ip3 from "../../images/person_3.jpg";
+import { Link, useNavigate } from 'react-router-dom';
 
 const About = () => {
+  const navigate = useNavigate();
+  const [works, setWorks] = useState([]);
+
+
+  useEffect(() => {
+    const fetchWorks = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8081/home/ngo/works`); 
+        setWorks(response.data); 
+      } catch (error) {
+        console.error('Error fetching works:', error);
+        toast.error('Error fetching works, please try again later.');
+      }
+    };
+
+      fetchWorks();
+
+  },[]);
   return (
     <>
       <Nav />
+      <ToastContainer />
       <div
         class="hero-wrap"
         style={{ backgroundImage: `url(${ibg_2})` }}
@@ -121,81 +143,42 @@ const About = () => {
         <div class="container">
           <div class="row justify-content-center mb-5 pb-3">
             <div class="col-md-7 heading-section ftco-animate text-center">
-              <h2 class="mb-4">Latest Donations</h2>
+              <h2 class="mb-4">Latest works</h2>
               <p>
                 Far far away, behind the word mountains, far from the countries
                 Vokalia and Consonantia, there live the blind texts.
               </p>
             </div>
           </div>
-          <div class="row">
-            <div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-              <div class="staff">
-                <div class="d-flex mb-4">
-                  <div
-                    class="img"
-                    style={{ backgroundImage: `url(${ip1})` }}
-                  ></div>
-                  <div class="info ml-4">
-                    <h3>
-                      <a href="teacher-single.html">Ivan Jacobson</a>
-                    </h3>
-                    <span class="position">Donated:30/05/2024</span>
-                    <div class="text">
-                      <p>
-                        Donated <span>30000 rs</span> for{" "}
-                      </p>
-                      <a>Children Needs Food</a>
-                    </div>
+          <div className="container">
+        <div className="row">
+          {works.length > 0 ? (
+            works.map((work) => (
+              <div className="col-md-4 mb-4" key={work.id}>
+                <div className="card shadow-sm">
+                  <img 
+                    src={`http://localhost:8081/uploads/${work.proof}`} 
+                    className="card-img-top" 
+                    alt="Proof of Work" 
+                    style={{ height: '200px', objectFit: 'cover' }} 
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{work.description}</h5>
+                    <p className="card-text">Total Expenses: ₹{work.expenses}</p>
+                    <p className="card-text">Submitted by: {work.ngoName}</p>
+                    <p className="card-text text-muted">
+                      <small>{new Date(work.date).toLocaleDateString()}</small>
+                    </p>
+                   
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-              <div class="staff">
-                <div class="d-flex mb-4">
-                  <div
-                    class="img"
-                    style={{ backgroundImage: `url(${ip2})` }}
-                  ></div>
-                  <div class="info ml-4">
-                    <h3>
-                      <a href="teacher-single.html">Ivan Jacobson</a>
-                    </h3>
-                    <span class="position">Donated:01/04/2024</span>
-                    <div class="text">
-                      <p>
-                        Donated <span>15000 rs</span> for{" "}
-                      </p>
-                      <a>Children Needs Food</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-              <div class="staff">
-                <div class="d-flex mb-4">
-                  <div
-                    class="img"
-                    style={{ backgroundImage: `url(${ip3})` }}
-                  ></div>
-                  <div class="info ml-4">
-                    <h3>
-                      <a href="teacher-single.html">Ivan Jacobson</a>
-                    </h3>
-                    <span class="position">Donated:11/06/2024</span>
-                    <div class="text">
-                      <p>
-                        Donated <span>25000 rs</span> for{" "}
-                      </p>
-                      <a>Children Needs Food</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            ))
+          ) : (
+            <p>No works submitted yet.</p>
+          )}
+        </div>
+      </div>
         </div>
       </section>
 

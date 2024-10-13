@@ -1,107 +1,33 @@
-.gallery-container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  top: 20vh;
-  margin-bottom:100%;
+body {
+  background-color: #f8f9fa; 
 }
 
-.gallery-container h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 2rem;
-
-}
-.gallery:after {
-  background-color: transparent;
+.gallery-card {
+  border-radius: 10px;
+  transition: transform 0.2s; 
 }
 
-.gallery-container input[type="file"] {
-  display: block;
-  margin: 20px auto;
+.gallery-card:hover {
+  transform: scale(1.05); 
 }
 
-.gallery-container button {
-  display: block;
-  margin: 10px auto;
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.card-img-top {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  max-height: 300px; 
+  object-fit: cover; 
 }
 
-.gallery-container button:hover {
-  background-color: #0056b3;
+.btn-primary {
+  background-color: #007bff; 
+  border: none; 
 }
 
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 5%;
-  width: max(1000px,90%);
-  gap: 20px;
-
+.btn-danger {
+  background-color: #dc3545;
+  border: none; 
 }
 
-.gallery-item {
-  position: relative;
-  width: 100%;
-  max-width:90%; 
-  height: max-content;
-  margin: 0 auto;
-}
-
-.gallery-item img {
-  width: 100%;
-  height: min(200px);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-#delete{
-  position: absolute;
-  top: 0;
-  right: 25px;
-  background: #dc3545;
-  border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #000000;
-  font-size: 22px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  z-index: 1;
-}
-
-#delete:hover {
-  background: #e57c85;
-}
-
-@media (min-width: 576px) {
-  .gallery-item {
-    width: calc(50% - 20px); 
-  }
-}
-
-@media (min-width: 768px) {
-  .gallery-item {
-    width: calc(33.33% - 20px); 
-  }
-}
-
-@media (min-width: 992px) {
-  .gallery-item {
-    width: calc(25% - 20px); 
-  }
+.upload{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }

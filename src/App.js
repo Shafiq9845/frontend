@@ -13,7 +13,15 @@ import Blocked from "./Componentes/User/Blocked.js";
 import Reject from "./Componentes/User/Reject.js";
 import Ahome from "./Componentes/Admin/Home.js";
 import PApl from "./Componentes/Admin/Pe_apl.js";
+import AApl from "./Componentes/Admin/Acp_apl.js";
+import RApl from "./Componentes/Admin/Rej_apl.js";
+import BApl from "./Componentes/Admin/Blc_apl.js";
+import Nwork from "./Componentes/Admin/N_work.js";
+import Volunteer from "./Componentes/Admin/Volunteer.js";
+import Doners from "./Componentes/Admin/Doners.js";
+import Wallet from "./Componentes/Ngo/Wallet.js";
 import Bank from './Componentes/Ngo/Bank.js';
+import NWork from './Componentes/Ngo/work.js';
 import ProtectedRoute from "./ProtectedRoute";
 import { AuthProvider } from "./context/authContext.js";
 import Gallery from "./Componentes/Ngo/Gallery.js";
@@ -61,8 +69,15 @@ const App = () => {
               <NContact />
             </ProtectedRoute>
           }
-        >
-        </Route>
+        ></Route>
+        <Route
+          path="Ngo/work"
+          element={
+            <ProtectedRoute>
+              <NWork />
+            </ProtectedRoute>
+          }
+        ></Route>
         <Route
           path="/pending"
           element={
@@ -100,6 +115,70 @@ const App = () => {
           element={
             <ProtectedRoute>
               <PApl />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Admin/Accepted_Applications"
+          element={
+            <ProtectedRoute>
+              <AApl />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Admin/Rejected_Applications"
+          element={
+            <ProtectedRoute>
+              <RApl />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Admin/Blocked_Applications"
+          element={
+            <ProtectedRoute>
+              <BApl />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Admin/volunteer"
+          element={
+            <ProtectedRoute>
+              <Volunteer />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Admin/doners"
+          element={
+            <ProtectedRoute>
+              <Doners />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Admin/doners"
+          element={
+            <ProtectedRoute>
+              <Doners />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Admin/nwork"
+          element={
+            <ProtectedRoute>
+              <Nwork />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Ngo/wallet"
+          element={
+            <ProtectedRoute>
+              <Wallet />
             </ProtectedRoute>
           }
         />

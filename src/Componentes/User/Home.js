@@ -30,9 +30,6 @@ import ic_6 from '../../images/cause-6.jpg'
 import i_1 from '../../images/image_1.jpg'
 import i_2 from '../../images/image_2.jpg'
 import i_3 from '../../images/image_3.jpg'
-import ie_1 from '../../images/event-1.jpg'
-import ie_2 from '../../images/event-2.jpg'
-import ie_3 from '../../images/event-3.jpg'
 const Home = () => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -52,7 +49,9 @@ const Home = () => {
   const [values, setValues] = useState({
     name:'',
     email:'',
+    pNo:'',
     message:'',
+    adr:'',
   });
   
 const handleInput=(event)=>{
@@ -285,259 +284,6 @@ const handleSubmit=(event)=>{
         </div>
       </section>
 
-      {/* <section class="ftco-section">
-        <div class="container">
-          <div class="row justify-content-center mb-5 pb-3">
-            <div class="col-md-7 heading-section ftco-animate text-center">
-              <h2 class="mb-4">Recent from blog</h2>
-              <p>
-                Far far away, behind the word mountains, far from the countries
-                Vokalia and Consonantia, there live the blind texts.
-              </p>
-            </div>
-          </div>
-          <div class="row d-flex">
-            <div class="col-md-4 d-flex ftco-animate">
-              <div class="blog-entry align-self-stretch">
-                <a
-                  href="blog-single.html"
-                  class="block-20"
-                  style={{ backgroundImage: `url(${i_1})` }}
-                ></a>
-                <div class="text p-4 d-block">
-                  <div class="meta mb-3">
-                    <div>
-                      <a href="#">Sept 10, 2018</a>
-                    </div>
-                    <div>
-                      <a href="#">Admin</a>
-                    </div>
-                    <div>
-                      <a href="#" class="meta-chat">
-                        <span class="icon-chat"></span> 3
-                      </a>
-                    </div>
-                  </div>
-                  <h3 class="heading mt-3">
-                    <a href="#">Hurricane Irma has devastated Florida</a>
-                  </h3>
-                  <p>
-                    A small river named Duden flows by their place and supplies
-                    it with the necessary regelialia.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 d-flex ftco-animate">
-              <div class="blog-entry align-self-stretch">
-                <a
-                  href="blog-single.html"
-                  class="block-20"
-                  style={{ backgroundImage: `url(${i_2})` }}
-                ></a>
-                <div class="text p-4 d-block">
-                  <div class="meta mb-3">
-                    <div>
-                      <a href="#">Sept 10, 2018</a>
-                    </div>
-                    <div>
-                      <a href="#">Admin</a>
-                    </div>
-                    <div>
-                      <a href="#" class="meta-chat">
-                        <span class="icon-chat"></span> 3
-                      </a>
-                    </div>
-                  </div>
-                  <h3 class="heading mt-3">
-                    <a href="#">Hurricane Irma has devastated Florida</a>
-                  </h3>
-                  <p>
-                    A small river named Duden flows by their place and supplies
-                    it with the necessary regelialia.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 d-flex ftco-animate">
-              <div class="blog-entry align-self-stretch">
-                <a
-                  href="blog-single.html"
-                  class="block-20"
-                  style={{ backgroundImage: `url(${i_3})` }}
-                ></a>
-                <div class="text p-4 d-block">
-                  <div class="meta mb-3">
-                    <div>
-                      <a href="#">Sept 10, 2018</a>
-                    </div>
-                    <div>
-                      <a href="#">Admin</a>
-                    </div>
-                    <div>
-                      <a href="#" class="meta-chat">
-                        <span class="icon-chat"></span> 3
-                      </a>
-                    </div>
-                  </div>
-                  <h3 class="heading mt-3">
-                    <a href="#">Hurricane Irma has devastated Florida</a>
-                  </h3>
-                  <p>
-                    A small river named Duden flows by their place and supplies
-                    it with the necessary regelialia.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="ftco-section bg-light">
-        <div class="container">
-          <div class="row justify-content-center mb-5 pb-3">
-            <div class="col-md-7 heading-section ftco-animate text-center">
-              <h2 class="mb-4">Our Latest Events</h2>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 d-flex ftco-animate">
-              <div class="blog-entry align-self-stretch">
-                <a
-                  href="blog-single.html"
-                  class="block-20"
-                  style={{ backgroundImage: `url(${ie_1})` }}
-                ></a>
-                <div class="text p-4 d-block">
-                  <div class="meta mb-3">
-                    <div>
-                      <a href="#">Sep. 10, 2018</a>
-                    </div>
-                    <div>
-                      <a href="#">Admin</a>
-                    </div>
-                    <div>
-                      <a href="#" class="meta-chat">
-                        <span class="icon-chat"></span> 3
-                      </a>
-                    </div>
-                  </div>
-                  <h3 class="heading mb-4">
-                    <a href="#">World Wide Donation</a>
-                  </h3>
-                  <p class="time-loc">
-                    <span class="mr-2">
-                      <i class="icon-clock-o"></i> 10:30AM-03:30PM
-                    </span>{" "}
-                    <span>
-                      <i class="icon-map-o"></i> Venue Main Campus
-                    </span>
-                  </p>
-                  <p>
-                    A small river named Duden flows by their place and supplies
-                    it with the necessary regelialia.
-                  </p>
-                  <p>
-                    <a href="event.html">
-                      Join Event <i class="ion-ios-arrow-forward"></i>
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 d-flex ftco-animate">
-              <div class="blog-entry align-self-stretch">
-                <a
-                  href="blog-single.html"
-                  class="block-20"
-                  style={{ backgroundImage: `url(${ie_2})` }}
-                ></a>
-                <div class="text p-4 d-block">
-                  <div class="meta mb-3">
-                    <div>
-                      <a href="#">Sep. 10, 2018</a>
-                    </div>
-                    <div>
-                      <a href="#">Admin</a>
-                    </div>
-                    <div>
-                      <a href="#" class="meta-chat">
-                        <span class="icon-chat"></span> 3
-                      </a>
-                    </div>
-                  </div>
-                  <h3 class="heading mb-4">
-                    <a href="#">World Wide Donation</a>
-                  </h3>
-                  <p class="time-loc">
-                    <span class="mr-2">
-                      <i class="icon-clock-o"></i> 10:30AM-03:30PM
-                    </span>{" "}
-                    <span>
-                      <i class="icon-map-o"></i> Venue Main Campus
-                    </span>
-                  </p>
-                  <p>
-                    A small river named Duden flows by their place and supplies
-                    it with the necessary regelialia.
-                  </p>
-                  <p>
-                    <a href="event.html">
-                      Join Event <i class="ion-ios-arrow-forward"></i>
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 d-flex ftco-animate" >
-              <div class="blog-entry align-self-stretch">
-                <a
-                  href="blog-single.html"
-                  class="block-20"
-                  style={{ backgroundImage: `url(${ie_3})` }}
-                ></a>
-                <div class="text p-4 d-block">
-                  <div class="meta mb-3">
-                    <div>
-                      <a href="#">Sep. 10, 2018</a>
-                    </div>
-                    <div>
-                      <a href="#">Admin</a>
-                    </div>
-                    <div>
-                      <a href="#" class="meta-chat">
-                        <span class="icon-chat"></span> 3
-                      </a>
-                    </div>
-                  </div>
-                  <h3 class="heading mb-4">
-                    <a href="#">World Wide Donation</a>
-                  </h3>
-                  <p class="time-loc">
-                    <span class="mr-2">
-                      <i class="icon-clock-o"></i> 10:30AM-03:30PM
-                    </span>{" "}
-                    <span>
-                      <i class="icon-map-o"></i> Venue Main Campus
-                    </span>
-                  </p>
-                  <p>
-                    A small river named Duden flows by their place and supplies
-                    it with the necessary regelialia.
-                  </p>
-                  <p>
-                    <a href="event.html">
-                      Join Event <i class="ion-ios-arrow-forward"></i>
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       <section
         class="ftco-section-3 img"
         style={{ backgroundImage: `url(${ibg_3})` }}
@@ -577,12 +323,33 @@ const handleSubmit=(event)=>{
                   />
                 </div>
                 <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Your Mobile Number"
+                    name="pNo"
+                    onChange={handleInput}
+                    required
+                  />
+                </div>
+                <div class="form-group">
                   <textarea
                     name="message"
                     cols="30"
                     rows="3"
                     class="form-control"
                     placeholder="Message"
+                    onChange={handleInput}
+                    required
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <textarea
+                    name="adr"
+                    cols="30"
+                    rows="3"
+                    class="form-control"
+                    placeholder="Address"
                     onChange={handleInput}
                     required
                   ></textarea>

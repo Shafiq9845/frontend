@@ -62,7 +62,7 @@ const Nav = () => {
         id="ftco-navbar"
       >
         <div className="container">
-          <Link className="navbar-brand" to="/">{ngoName}</Link>
+          <Link className="navbar-brand" to="/Ngo/home">{ngoName}</Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -86,12 +86,15 @@ const Nav = () => {
               <li className={`nav-item ${isActive('/Ngo/gallery')}`}>
                 <Link to="/Ngo/gallery" className="nav-link">Gallery</Link>
               </li>
-              <li className={`nav-item ${isActive('/doners')}`}>
-                <Link to="/doners" className="nav-link">Doners</Link>
+              <li className={`nav-item ${isActive('/Ngo/work')}`}>
+                <Link to="/Ngo/work" className="nav-link">Work</Link>
               </li>
               <li className={`nav-item ${isActive('/Ngo/bank')}`}>
                 <Link to="/Ngo/bank" className="nav-link">Add Bank</Link>
               </li>
+              <li className={`nav-item ${isActive('/Ngo/wallet')}`}>
+              <Link to="/Ngo/wallet" className="nav-link"><i className="bi bi-wallet2"></i> Wallet</Link>
+            </li>
               <li className={`nav-item ${isActive('')}`}>
                 <Link to="" className="nav-link" onClick={handleLogout} title='Logout'>
                   <i className="bi bi-box-arrow-right"></i>

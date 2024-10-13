@@ -52,7 +52,7 @@ const Nav = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+      <nav className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light top-0" id="ftco-navbar">
         <div className="container">
           <Link className="navbar-brand" to="/">Welfare</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,17 +64,16 @@ const Nav = () => {
               <li className={`nav-item ${isActive('/Admin/home')}`}>
                 <Link to='/Admin/home' className="nav-link">Home</Link>
               </li>
-              <li className={`nav-item ${isActive('/About')}`}>
-                <Link to='/Admin/home' className="nav-link">About</Link>
+              <li className={`nav-item ${isActive('/Admin/doners')}`}>
+                <Link to='/Admin/doners' className="nav-link">Doners</Link>
               </li>
-              <li className={`nav-item ${isActive('/donate')}`}>
-                <Link to="/Admin/home" className="nav-link">Donate</Link>
+              <li className={`nav-item ${isActive('/Admin/volunteer')}`}>
+                <Link to="/Admin/volunteer" className="nav-link">Volunteer</Link>
               </li>
-              <li className={`nav-item ${isActive('/contact')}`}>
-                <Link to="/Admin/home" className="nav-link">Contact</Link>
+              <li className={`nav-item ${isActive('/Admin/nwork')}`}>
+                <Link to="/Admin/nwork" className="nav-link">Work</Link>
               </li>
 
-              {/* Dropdown for Applications */}
               <li className="nav-item dropdown">
                 <Link
                   className={`nav-link dropdown-toggle ${isActive('/Admin/Pending_Applications') || isActive('/Admin/Accepted_Applications') || isActive('/Admin/Rejected_Applications') || isActive('/Admin/Blocked_Applications')}`}

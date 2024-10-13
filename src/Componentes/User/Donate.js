@@ -94,7 +94,9 @@ const Donate = () => {
   const [values, setValues] = useState({
     name: "",
     email: "",
+    pNo:"",
     message: "",
+    adrr:"",
   });
 
   const handleInput = (event) => {
@@ -154,22 +156,17 @@ const Donate = () => {
   
 
 
-
   useEffect(() => {
-    const fetchPendingApplications = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8081/api/ngo/accept"
-        );
-        setApplications(response.data);
-      } catch (error) {
-        console.error("Error fetching pending applications:", error);
-        toast.error(`Failed to fetch applications: ${error.message}`);
-      }
+    const fetchNGOs = async () => {
+        const response = await fetch('http://localhost:8081/api/ngo/accept');
+        const data = await response.json();
+        setApplications(data);
     };
 
-    fetchPendingApplications();
-  }, []);
+    fetchNGOs();
+}, []);
+
+
 
   useEffect(() => {
     if (selectedApplication) {
@@ -263,12 +260,14 @@ const Donate = () => {
                   className={`col-lg-4 d-flex mb-sm-4 ftco-animate flip-card 
                   ${flipped[application.id] ? "flipped" : ""}`}
                 >
+                  
                   <div className="flip-card-inner">
                     <div className="flip-card-front">
+                      <div style={{position:"relative", width:"100%", backgroundColor:"#00000024", color:"black", textTransform: "uppercase", fontFamily:"Cursive", fontWeight:"bolder"}}>{application.Name}</div>
                       <div
                         className="img br-0"
                         style={{
-                          backgroundImage: `url(${ibg_4})`,
+                          backgroundImage: `url(http://localhost:8081/uploads/${application.pImage})`,
                           height: "250px",
                           backgroundSize: "cover",
                           backgroundPosition: "center",
@@ -429,6 +428,16 @@ const Donate = () => {
                     required
                   />
                 </div>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Your Mobile Number"
+                    name="pNo"
+                    onChange={handleInput}
+                    required
+                  />
+                </div>
                 <div className="form-group">
                   <textarea
                     cols="30"
@@ -437,6 +446,17 @@ const Donate = () => {
                     name="message"
                     placeholder="Message"
                     value={values.message}
+                    onChange={handleInput}
+                    required
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <textarea
+                    name="adr"
+                    cols="30"
+                    rows="3"
+                    class="form-control"
+                    placeholder="Address"
                     onChange={handleInput}
                     required
                   ></textarea>

@@ -4,6 +4,8 @@ import Nav from './Nav';
 import '../../Css/style/pendingApli.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from "../User/Footer";
+
 
 const Pe_apl = () => {
   const [applications, setApplications] = useState([]);
@@ -40,12 +42,12 @@ const Pe_apl = () => {
     <>
       <Nav />
       <ToastContainer/>
-      <div className="container mt-4 pending-container">
+      <div className="container mt-4 pending-container position-relative" style={{marginBottom:"900px"}}>
         <div className="table-responsive">
           <table className="table table-striped">
             <thead>
               <tr>
-                <th>#</th>
+                <th>Sl.No</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Registration Number</th>
@@ -86,7 +88,8 @@ const Pe_apl = () => {
             </tbody>
           </table>
         </div>
-      </div>    
+      </div>  
+      <Footer />  
     </>
   );
 };

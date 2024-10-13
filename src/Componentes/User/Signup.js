@@ -20,7 +20,7 @@ import "../../Css/flaticon.css";
 import "../../Css/icomoon.css";
 import "../../Css/style.css";
 import "../../Css/style/loginsignup.css";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   const formRef = useRef(null);
@@ -42,17 +42,27 @@ const Signup = () => {
     password: '',
     number: '',
     contactPerson: '',
-    contactPersonPhone: ''
+    contactPersonPhone: '',
+    pImaage: null,
   });
-  const navigate=useNavigate();
+  
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
   const handleInput = (event) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    });
+    const { name, value, files } = event.target;
+
+    if (name === 'pImage' && files.length > 0) {
+      setValues({
+        ...values,
+        pImage: files[0]  
+      });
+    } else {
+      setValues({
+        ...values,
+        [name]: value
+      });
+    }
   };
 
 
@@ -63,10 +73,33 @@ const Signup = () => {
     setErrors(err);
 
     if (!err.name && !err.email && !err.password && !err.number && !err.ngoName && !err.ngoAddress && !err.ngoType && !err.ngoRegistrationNumber && !err.contactPerson && !err.contactPersonPhone ) {
-      axios
-      .post('http://localhost:8081/signup', values)
+      
+      const formData = new FormData();
+
+      formData.append('ngoName', values.ngoName);
+      formData.append('ngoType', values.ngoType);
+      formData.append('ngoRegistrationNumber', values.ngoRegistrationNumber);
+      formData.append('ngoAddress', values.ngoAddress);
+      formData.append('city', values.city);
+      formData.append('pincode', values.pincode);
+      formData.append('email', values.email);
+      formData.append('password', values.password);
+      formData.append('number', values.number);
+      formData.append('contactPerson', values.contactPerson);
+      formData.append('contactPersonPhone', values.contactPersonPhone);
+
+      if (values.pImage) {
+        formData.append('pImage', values.pImage);
+      }
+
+      axios.post('http://localhost:8081/signup', formData,{
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
         .then((res) => {
-          if (res.data === 'Faile') {
+          console.log(res.data);
+          if (res.data.status === 'fail') {
             toast.error('User Already Exists...!')
           } else {
             toast.success('Registration successful! Please login.');
@@ -263,6 +296,22 @@ const Signup = () => {
               <span className='focus-border'></span>
             </div>
               {errors.contactPersonPhone && <span className='text-danger'>{errors.contactPersonPhone}</span>}
+            </div>
+            <div>
+            <div className='mb-3 wrap-input-1 grid-item'>
+              <label htmlFor='pImage'><strong>NGO Profile Image</strong></label>
+              <input
+                type='file'
+                name='pImage'
+                id='pImage'
+                placeholder='Slect image for profile'
+                className='input form-control rounded-0'
+                onChange={handleInput}
+                required
+              />
+              <span className='focus-border'></span>
+            </div>
+              {errors.pImage && <span className='text-danger'>{errors.pImage}</span>}
             </div>
             <button type='submit' className='btn-39 w-100 rounded-0 rounded-pill mt-3 submit-button'>
               <strong>
