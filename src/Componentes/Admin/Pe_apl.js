@@ -30,13 +30,16 @@ const Pe_apl = () => {
     try {
       const url = `http://localhost:8081/api/ngo/${action}/${id}`;
       await axios.post(url);
+      toast.success(`Application ${action}ed successfully!`);
+  
       const response = await axios.get("http://localhost:8081/api/ngo/pending");
       setApplications(response.data);
     } catch (error) {
-      console.error(`Error ${action} application:`, error);
+      console.error(`Error ${action}ing application:`, error);
+      toast.error(`Failed to ${action} application: ${error.message}`);
     }
   };
-
+  
 
   return (
     <>
@@ -66,7 +69,7 @@ const Pe_apl = () => {
                   <td>{application.ngo_reg_no}</td>
                   <td>{application.address}</td>
                   <td>
-                    {new Date(application.date).toLocaleDateString()}
+                    {application.date ? new Date(application.date).toLocaleDateString() : "N/A"}
                   </td>
                   <td>{application.status}</td>
                   <td>

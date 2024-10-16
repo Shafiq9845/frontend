@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import CountUp from "react-countup";
+import { toast, ToastContainer } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../Css/open-iconic-bootstrap.min.css";
 import "../../Css/animate.css";
@@ -19,51 +20,55 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 import ibg_3 from "../../images/bg_3.jpg";
 import ibg_2 from "../../images/bg_2.jpg";
-import ip1 from "../../images/person_1.jpg";
-import ip2 from "../../images/person_2.jpg";
-import ip3 from "../../images/person_3.jpg";
-import { Link, useNavigate } from 'react-router-dom';
 
 const About = () => {
-  const navigate = useNavigate();
   const [works, setWorks] = useState([]);
+  const [amount, setAmount] = useState(0);
 
+  useEffect(() => {
+    const storedAmount = localStorage.getItem("amount");
+    if (storedAmount) {
+      setAmount(parseInt(storedAmount, 10));
+    }
+  }, []);
 
   useEffect(() => {
     const fetchWorks = async () => {
       try {
-        const response = await axios.get(`http://localhost:8081/home/ngo/works`); 
-        setWorks(response.data); 
+        const response = await axios.get(
+          `http://localhost:8081/home/ngo/works`
+        );
+        setWorks(response.data);
       } catch (error) {
-        console.error('Error fetching works:', error);
-        toast.error('Error fetching works, please try again later.');
+        console.error("Error fetching works:", error);
+        toast.error("Error fetching works, please try again later.");
       }
     };
 
-      fetchWorks();
+    fetchWorks();
+  }, []);
 
-  },[]);
   return (
     <>
       <Nav />
       <ToastContainer />
       <div
-        class="hero-wrap"
+        className="hero-wrap"
         style={{ backgroundImage: `url(${ibg_2})` }}
         data-stellar-background-ratio="0.5"
       >
-        <div class="overlay"></div>
-        <div class="container">
+        <div className="overlay"></div>
+        <div className="container">
           <div
-            class="row no-gutters slider-text align-items-center justify-content-center"
+            className="row no-gutters slider-text align-items-center justify-content-center"
             data-scrollax-parent="true"
           >
             <div
-              class="col-md-7 ftco-animate text-center"
-              data-scrollax=" properties: { translateY: '70%' }"
+              className="col-md-7 ftco-animate text-center"
+              data-scrollax="properties: { translateY: '70%' }"
             >
               <h1
-                class="mb-3 bread title"
+                className="mb-3 bread title"
                 data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"
               >
                 About Us
@@ -73,29 +78,32 @@ const About = () => {
         </div>
       </div>
 
-      <section class="ftco-section w-10">
-        <div class="container">
-          <div class="row d-flex">
+      <section className="ftco-section w-10">
+        <div className="container">
+          <div className="row d-flex">
             <div
-              class="col-md-6 d-flex ftco-animate"
+              className="col-md-6 d-flex ftco-animate"
               style={{
                 backgroundImage: `url(${ibg_3})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
-                height:"330px",
-                left:"15px",
+                height: "330px",
               }}
             >
-              <div class="img img-about align-self-stretch"></div>
+              <div className="img img-about align-self-stretch"></div>
             </div>
-            <div class="col-md-6 pl-md-5 ftco-animate">
-              <h2 class="mb-4">Welcome to NGO Since 1898</h2>
+            <div className="col-md-6 pl-md-5 ftco-animate">
+              <h2 className="mb-4">Welcome to Our NGO, Serving Since 1898</h2>
               <p>
-                It was all during one fine day that when we where crossing over the streets   
-                
+                Our journey began over a century ago, with a simple mission: to
+                bring hope and support to those in need. On that pivotal day, as
+                we walked through the streets, we saw the true impact that
+                compassion and care could have on the lives of others.
               </p>
               <p>
-                
+                Since then, we’ve been dedicated to transforming communities,
+                reaching out to those most vulnerable, and making the world a
+                better place one step at a time.
               </p>
             </div>
           </div>
@@ -103,32 +111,41 @@ const About = () => {
       </section>
 
       <section
-        class="ftco-counter ftco-intro ftco-intro-2"
+        className="ftco-counter ftco-intro ftco-intro-2"
         id="section-counter"
       >
-        <div class="container">
-          <div class="row no-gutters">
-            <div class="col-md-5 d-flex justify-content-center counter-wrap ftco-animate">
-              <div class="block-18 color-1 align-items-stretch">
-                <div class="text">
-                  <span>Served Over</span>
-                  <strong class="number" data-number="1432805">
-                    0
+        <div className="container">
+          <div className="row no-gutters">
+            <div className="col-md-5 d-flex justify-content-center counter-wrap ftco-animate">
+              <div className="block-18 color-1 align-items-stretch">
+                <div className="text">
+                  <span>Total Funds Raised</span>
+                  <strong className="number">
+                    <CountUp
+                      style={{ fontSize: "55px", fontWeight: "bold" }}
+                      start={0}
+                      end={amount}
+                      duration={3}
+                      separator=","
+                      prefix="₹"
+                    />
                   </strong>
-                  <span>Children in 190 countries in the world</span>
+                  <span>
+                    to support children across 190 countries worldwide
+                  </span>
                 </div>
               </div>
             </div>
-            <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-              <div class="block-18 color-2 align-items-stretch">
-                <div class="text">
-                  <h3 class="mb-4">Donate Money</h3>
+            <div className="col-md d-flex justify-content-center counter-wrap ftco-animate">
+              <div className="block-18 color-2 align-items-stretch">
+                <div className="text">
+                  <h3 className="mb-4">Donate Money</h3>
                   <p>
-                    Even the all-powerful Pointing has no control about the
-                    blind texts.
+                    Your support can make a significant difference in the lives
+                    of those in need.
                   </p>
                   <p>
-                    <a href="/Donate" class="btn btn-white px-3 py-2 mt-2">
+                    <a href="/Donate" className="btn btn-white px-3 py-2 mt-2">
                       Donate Now
                     </a>
                   </p>
@@ -139,46 +156,47 @@ const About = () => {
         </div>
       </section>
 
-      <section class="ftco-section bg-light">
-        <div class="container">
-          <div class="row justify-content-center mb-5 pb-3">
-            <div class="col-md-7 heading-section ftco-animate text-center">
-              <h2 class="mb-4">Latest works</h2>
+      <section className="ftco-section bg-light">
+        <div className="container">
+          <div className="row justify-content-center mb-5 pb-3">
+            <div className="col-md-7 heading-section ftco-animate text-center">
+              <h2 className="mb-4">Latest Works</h2>
               <p>
                 Far far away, behind the word mountains, far from the countries
                 Vokalia and Consonantia, there live the blind texts.
               </p>
             </div>
           </div>
-          <div className="container">
-        <div className="row">
-          {works.length > 0 ? (
-            works.map((work) => (
-              <div className="col-md-4 mb-4" key={work.id}>
-                <div className="card shadow-sm">
-                  <img 
-                    src={`http://localhost:8081/uploads/${work.proof}`} 
-                    className="card-img-top" 
-                    alt="Proof of Work" 
-                    style={{ height: '200px', objectFit: 'cover' }} 
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{work.description}</h5>
-                    <p className="card-text">Total Expenses: ₹{work.expenses}</p>
-                    <p className="card-text">Submitted by: {work.ngoName}</p>
-                    <p className="card-text text-muted">
-                      <small>{new Date(work.date).toLocaleDateString()}</small>
-                    </p>
-                   
+          <div className="row">
+            {works.length > 0 ? (
+              works.map((work) => (
+                <div className="col-md-4 mb-4" key={work.id}>
+                  <div className="card shadow-sm">
+                    <img
+                      src={`http://localhost:8081/uploads/${work.proof}`}
+                      className="card-img-top"
+                      alt="Proof of Work"
+                      style={{ height: "200px", objectFit: "cover" }}
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">{work.description}</h5>
+                      <p className="card-text">
+                        Total Expenses: ₹{work.expenses}
+                      </p>
+                      <p className="card-text">Submitted by: {work.ngoName}</p>
+                      <p className="card-text text-muted">
+                        <small>
+                          {new Date(work.date).toLocaleDateString()}
+                        </small>
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
-          ) : (
-            <p>No works submitted yet.</p>
-          )}
-        </div>
-      </div>
+              ))
+            ) : (
+              <p>No works submitted yet.</p>
+            )}
+          </div>
         </div>
       </section>
 

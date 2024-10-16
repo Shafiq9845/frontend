@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import CountUp from "react-countup";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../Css/open-iconic-bootstrap.min.css";
 import "../../Css/animate.css";
@@ -17,23 +18,24 @@ import "../../Css/icomoon.css";
 import "../../Css/style.css";
 import "../../Css/style/home.css";
 import Nav from "./Nav";
-import Modal from '../Model';
+import Modal from "../Model";
 import Footer from "./Footer";
-import ibg_3 from '../../images/bg_3.jpg'
-import ibg_4 from '../../images/bg_4.jpg'
-import ibg_7 from '../../images/bg_7.jpg'
-import ic_2 from '../../images/cause-2.jpg'
-import ic_3 from '../../images/cause-3.jpg'
-import ic_4 from '../../images/cause-4.jpg'
-import ic_5 from '../../images/cause-5.jpg'
-import ic_6 from '../../images/cause-6.jpg'
-import i_1 from '../../images/image_1.jpg'
-import i_2 from '../../images/image_2.jpg'
-import i_3 from '../../images/image_3.jpg'
+import ibg_3 from "../../images/bg_3.jpg";
+import ibg_4 from "../../images/bg_4.jpg";
+import ibg_7 from "../../images/bg_7.jpg";
+import ic_2 from "../../images/cause-2.jpg";
+import ic_3 from "../../images/cause-3.jpg";
+import ic_4 from "../../images/cause-4.jpg";
+import ic_5 from "../../images/cause-5.jpg";
+import ic_6 from "../../images/cause-6.jpg";
+import i_1 from "../../images/image_1.jpg";
+import i_2 from "../../images/image_2.jpg";
+import i_3 from "../../images/image_3.jpg";
 const Home = () => {
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState('');
+  const [currentImage, setCurrentImage] = useState("");
+  const [amount, setamount] = useState();
+  localStorage.setItem("amount", amount);
 
   const openModal = (imageUrl) => {
     setCurrentImage(imageUrl);
@@ -42,33 +44,40 @@ const Home = () => {
 
   const closeModal = () => {
     setModalIsOpen(false);
-    setCurrentImage('');
+    setCurrentImage("");
   };
 
-
   const [values, setValues] = useState({
-    name:'',
-    email:'',
-    pNo:'',
-    message:'',
-    adr:'',
+    name: "",
+    email: "",
+    pNo: "",
+    message: "",
+    adr: "",
   });
-  
-const handleInput=(event)=>{
-  setValues({
-    ...values,
-    [event.target.name]:event.target.value
-  });
-};
-const handleSubmit=(event)=>{
-  axios.post('http://localhost:8081/volunteer',values)
-  .then((res)=>{
-    if(res.data.status==='Success'){
-      toast('Done');
 
-    }
-  })
-}
+  const handleInput = (event) => {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value,
+    });
+  };
+  const handleSubmit = (event) => {
+    axios.post("http://localhost:8081/volunteer", values).then((res) => {
+      if (res.data.status === "Success") {
+        toast("Done");
+      }
+    });
+  };
+
+  useEffect(() => {
+    const fetchamount = async () => {
+      const response = await fetch("http://localhost:8081/count");
+      const data = await response.json();
+      setamount(data);
+    };
+    fetchamount();
+  }, []);
+
   return (
     <>
       <ToastContainer />
@@ -92,51 +101,65 @@ const handleSubmit=(event)=>{
                 class="mb-4 title"
                 data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"
               >
-                Doing Nothing is Not An Option of Our Life
+                Doing Nothing is Not an Option in Our Lives
               </h1>
             </div>
           </div>
         </div>
       </div>
 
-      <section class="ftco-counter ftco-intro" id="section-counter">
-        <div class="container">
-          <div class="row no-gutters">
-            <div class="col-md-5 d-flex justify-content-center counter-wrap ftco-animate">
-              <div class="block-18 color-1 align-items-stretch">
-                <div class="text">
-                  <span>Served Over</span>
-                  <strong class="number" data-number="1432805">
-                    0
+      <section className="ftco-counter ftco-intro" id="section-counter">
+        <div className="container">
+          <div className="row no-gutters">
+            <div className="col-md-5 d-flex justify-content-center counter-wrap ftco-animate">
+              <div className="block-18 color-1 align-items-stretch">
+                <div className="text">
+                  <span>Total Funds Raised</span>
+                  <strong className="number">
+                    <CountUp
+                      style={{ fontSize: "55px", fontWeight: "bold" }}
+                      start={0}
+                      end={amount}
+                      duration={3}
+                      separator=","
+                      prefix="₹"
+                    />
                   </strong>
-                  <span>Children in 190 countries in the world</span>
+                  <span>
+                    to support children across 190 countries worldwide
+                  </span>
                 </div>
               </div>
             </div>
-            <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-              <div class="block-18 color-2 align-items-stretch">
-                <div class="text">
-                  <h3 class="mb-4">Donate Money</h3>
+            <div className="col-md d-flex justify-content-center counter-wrap ftco-animate">
+              <div className="block-18 color-2 align-items-stretch">
+                <div className="text">
+                  <h3 className="mb-4">Support Our Cause</h3>
                   <p>
-                   Be a giving hand who steadfast for helping the needy and the poor. 
+                    Your donation helps us provide critical resources to
+                    children in need. Together, we can make a difference.
                   </p>
                   <p>
-                    <a href="/Donate" class="btn btn-white px-3 py-2 mt-8">
+                    <a href="/Donate" className="btn btn-white px-3 py-2 mt-8">
                       Donate Now
                     </a>
                   </p>
                 </div>
               </div>
             </div>
-            <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-              <div class="block-18 color-3 align-items-stretch">
-                <div class="text">
-                  <h3 class="mb-4">Be a Volunteer</h3>
+            <div className="col-md d-flex justify-content-center counter-wrap ftco-animate">
+              <div className="block-18 color-3 align-items-stretch">
+                <div className="text">
+                  <h3 className="mb-4">Join as a Volunteer</h3>
                   <p>
-                    volunteering for the cause which is actually not noticed by many but the deeper question is that it actually benefits many for unknown reasons.
+                    Become part of our global network of volunteers. Your time
+                    and effort can change the lives of many, one step at a time.
                   </p>
                   <p>
-                    <a href="#volunteer" class="btn btn-white px-3 py-2 mt-2">
+                    <a
+                      href="#volunteer"
+                      className="btn btn-white px-3 py-2 mt-2"
+                    >
                       Be A Volunteer
                     </a>
                   </p>
@@ -147,47 +170,52 @@ const handleSubmit=(event)=>{
         </div>
       </section>
 
-      <section class="ftco-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-              <div class="media block-6 d-flex services p-3 py-4 d-block">
-                <div class="icon d-flex mb-3">
-                  <span class="flaticon-donation-1"></span>
+      <section className="ftco-section">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-4 d-flex align-self-stretch ftco-animate">
+              <div className="media block-6 d-flex services p-3 py-4 d-block">
+                <div className="icon d-flex mb-3">
+                  <span className="flaticon-donation-1"></span>
                 </div>
-                <div class="media-body pl-4">
-                  <h3 class="heading">Make Donation</h3>
+                <div className="media-body pl-4">
+                  <h3 className="heading">Make a Donation</h3>
                   <p>
-                    Even the all-powerful Pointing has no control about the
-                    blind texts it is an almost unorthographic.
+                    Your generous donation can provide essential resources and
+                    support to those in need, creating a lasting impact in their
+                    lives.
                   </p>
                 </div>
               </div>
             </div>
-            <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-              <div class="media block-6 d-flex services p-3 py-4 d-block">
-                <div class="icon d-flex mb-3">
-                  <span class="flaticon-charity"></span>
+
+            <div className="col-md-4 d-flex align-self-stretch ftco-animate">
+              <div className="media block-6 d-flex services p-3 py-4 d-block">
+                <div className="icon d-flex mb-3">
+                  <span className="flaticon-charity"></span>
                 </div>
-                <div class="media-body pl-4">
-                  <h3 class="heading">Become A Volunteer</h3>
+                <div className="media-body pl-4">
+                  <h3 className="heading">Become a Volunteer</h3>
                   <p>
-                    Even the all-powerful Pointing has no control about the
-                    blind texts it is an almost unorthographic.
+                    Join our team of dedicated volunteers and make a meaningful
+                    difference by contributing your time and skills to help
+                    those in need.
                   </p>
                 </div>
               </div>
             </div>
-            <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-              <div class="media block-6 d-flex services p-3 py-4 d-block">
-                <div class="icon d-flex mb-3">
-                  <span class="flaticon-donation"></span>
+
+            <div className="col-md-4 d-flex align-self-stretch ftco-animate">
+              <div className="media block-6 d-flex services p-3 py-4 d-block">
+                <div className="icon d-flex mb-3">
+                  <span className="flaticon-donation"></span>
                 </div>
-                <div class="media-body pl-4">
-                  <h3 class="heading">Sponsorship</h3>
+                <div className="media-body pl-4">
+                  <h3 className="heading">Sponsorship</h3>
                   <p>
-                    Even the all-powerful Pointing has no control about the
-                    blind texts it is an almost unorthographic.
+                    Partner with us to sponsor key programs that help transform
+                    communities, providing opportunities for education,
+                    healthcare, and more.
                   </p>
                 </div>
               </div>
@@ -196,9 +224,8 @@ const handleSubmit=(event)=>{
         </div>
       </section>
 
-      
-     <section className="ftco-gallery" id='glr'>
-        <div className="d-md-flex" >
+      <section className="ftco-gallery" id="glr">
+        <div className="d-md-flex">
           <a
             href="#glr"
             className="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate"
@@ -287,7 +314,7 @@ const handleSubmit=(event)=>{
       <section
         class="ftco-section-3 img"
         style={{ backgroundImage: `url(${ibg_3})` }}
-        id='volunteer'
+        id="volunteer"
       >
         <div class="overlay"></div>
         <div class="container">
@@ -296,7 +323,6 @@ const handleSubmit=(event)=>{
               <div
                 class="img img-2 align-self-stretch"
                 style={{ backgroundImage: `url(${ibg_4})` }}
-
               ></div>
             </div>
             <div class="col-md-6 volunteer pl-md-5 ftco-animate">
@@ -355,10 +381,7 @@ const handleSubmit=(event)=>{
                   ></textarea>
                 </div>
                 <div class="form-group">
-                  <input
-                    type="submit"
-                    class="btn btn-white py-3 px-5"
-                  />
+                  <input type="submit" class="btn btn-white py-3 px-5" />
                 </div>
               </form>
             </div>
@@ -366,7 +389,11 @@ const handleSubmit=(event)=>{
         </div>
       </section>
       <Footer />
-      <Modal isOpen={modalIsOpen} imageUrl={currentImage} onClose={closeModal} />
+      <Modal
+        isOpen={modalIsOpen}
+        imageUrl={currentImage}
+        onClose={closeModal}
+      />
     </>
   );
 };
